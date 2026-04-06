@@ -1,0 +1,73 @@
+{
+    "name": "AI Sales Assistant – Altair (текущий webhook)",
+    "nodes": [
+        {
+            "parameters": {
+                "path": "altair-ai-helper",
+                "httpMethod": "POST",
+                "responseMode": "onReceived"
+            },
+            "id": "webhook",
+            "name": "Webhook Trigger",
+            "type": "n8n-nodes-base.Webhook",
+            "position": [
+                240,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "requestMethod": "POST",
+                "url": "https://altaircom.bitrix24.ru/rest/276/nxv29r67o1qp5hd3/crm.deal.get",
+                "jsonParameters": true,
+                "options": {}
+            },
+            "id": "deal",
+            "name": "Bitrix: crm.deal.get",
+            "type": "n8n-nodes-base.HttpRequest",
+            "position": [
+                460,
+                300
+            ]
+        },
+        {
+            "parameters": {
+                "requestMethod": "POST",
+                "url": "https://altaircom.bitrix24.ru/rest/276/nxv29r67o1qp5hd3/crm.timeline.comment.list",
+                "jsonParameters": true,
+                "options": {}
+            },
+            "id": "timeline",
+            "name": "Bitrix: timeline + CoPilot",
+            "type": "n8n-nodes-base.HttpRequest",
+            "position": [
+                680,
+                300
+            ]
+        }
+    ],
+    "connections": {
+        "Webhook Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Bitrix: crm.deal.get",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Bitrix: crm.deal.get": {
+            "main": [
+                [
+                    {
+                        "node": "Bitrix: timeline + CoPilot",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    }
+}

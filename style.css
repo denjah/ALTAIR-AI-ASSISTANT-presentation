@@ -1,0 +1,320 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+@font-face {
+  font-family: 'EuropeExt';
+  src: url('EuropeExt.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EuropeExt';
+  src: url('EuropeExt-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e2ded4;
+  /* Updated theme color */
+  color: #0A2540;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.presentation-container {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  background-color: #e2ded4;
+}
+
+/* ============================================================
+   SLIDE SYSTEM
+   ============================================================ */
+
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  scroll-snap-align: start;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background-color: #e2ded4;
+}
+
+/* — Background image layer (strictly 1920x1080, centered) — */
+.slide-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1920px;
+  height: 1080px;
+  z-index: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* — Specific backgrounds (SLIDE_IMAGES) — */
+.slide:nth-child(1) .slide-bg {
+  background-image: url('SLIDE_IMAGES/01_PREZ_image_18-2X.jpg');
+}
+
+.slide:nth-child(2) .slide-bg {
+  background-image: url('SLIDE_IMAGES/02_PREZ_image_12-2X.jpg');
+}
+
+.slide:nth-child(3) .slide-bg {
+  background-image: url('SLIDE_IMAGES/03_PREZ_image_23.png');
+}
+
+.slide:nth-child(4) .slide-bg {
+  background-image: url('SLIDE_IMAGES/04_PREZ_image_30.png');
+}
+
+.slide:nth-child(5) .slide-bg {
+  background-image: url('SLIDE_IMAGES/05_PREZ_image_10-2X.jpg');
+}
+
+.slide:nth-child(6) .slide-bg {
+  background-image: url('SLIDE_IMAGES/06_PREZ_image_17-2X.jpg');
+}
+
+/* ============================================================
+   CONTENT LAYER
+   ============================================================ */
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1920px;
+  height: 1080px;
+  display: flex;
+  align-items: center;
+  padding: 4% 8%;
+  pointer-events: none;
+}
+
+.text-zone {
+  width: 50%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
+  pointer-events: auto;
+}
+
+/* — Typography & Stroke effect (Knock-out outline) — */
+.slide-title,
+.slide-subtitle,
+.slide-body,
+.slide-list li,
+.example-block,
+.stage-block,
+.slide-steps li,
+.slide-thanks,
+.slide-detail {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: fit-content;
+  box-shadow: none;
+  margin: 0;
+  /* 2px stroke in background color #e2ded4 */
+  text-shadow:
+    -2px -2px 0 #e2ded4,
+    2px -2px 0 #e2ded4,
+    -2px 2px 0 #e2ded4,
+    2px 2px 0 #e2ded4,
+    0px -2px 0 #e2ded4,
+    0px 2px 0 #e2ded4,
+    -2px 0px 0 #e2ded4,
+    2px 0px 0 #e2ded4;
+}
+
+.slide-title {
+  font-family: 'EuropeExt', sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #0A2540;
+}
+
+.slide-subtitle {
+  font-family: 'EuropeExt', sans-serif;
+  font-weight: 700;
+  font-size: clamp(14px, 1.4vw, 28px);
+  line-height: 1.2;
+  color: #0A2540;
+}
+
+.slide-body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(12px, 0.9vw, 17px);
+  line-height: 1.5;
+  color: #0A2540;
+}
+
+.slide-detail {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(10px, 0.7vw, 13px);
+  line-height: 1.4;
+  color: rgba(10, 37, 64, 0.6);
+}
+
+.slide-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3vw;
+}
+
+.slide-list li {
+  font-size: clamp(12px, 0.9vw, 17px);
+  line-height: 1.3;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #0A2540;
+  opacity: 0.15;
+  margin: 0.1vw 0;
+}
+
+/* — Mascot — */
+.main-logo {
+  width: clamp(200px, 18vw, 420px);
+  height: auto;
+  margin-bottom: 2vw;
+  display: block;
+}
+
+.mascot {
+  position: absolute;
+  bottom: 0%;
+  right: 100px;
+  width: 32%;
+  max-width: 640px;
+  height: auto;
+  z-index: 3;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 32px rgba(10, 37, 64, 0.15));
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+}
+
+.mascot.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+.text-zone>* {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.text-zone>*.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Delay */
+.text-zone>*:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.text-zone>*:nth-child(2) {
+  transition-delay: 0.12s;
+}
+
+.text-zone>*:nth-child(3) {
+  transition-delay: 0.19s;
+}
+
+.text-zone>*:nth-child(4) {
+  transition-delay: 0.26s;
+}
+
+.text-zone>*:nth-child(5) {
+  transition-delay: 0.33s;
+}
+
+.text-zone>*:nth-child(6) {
+  transition-delay: 0.40s;
+}
+
+.text-zone>*:nth-child(7) {
+  transition-delay: 0.47s;
+}
+
+.text-zone>*:nth-child(8) {
+  transition-delay: 0.54s;
+}
+
+.text-zone>*:nth-child(9) {
+  transition-delay: 0.61s;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .text-zone {
+    width: 90%;
+    max-width: 90%;
+  }
+
+  .mascot {
+    width: 40%;
+    right: 5%;
+  }
+}
+
+@media (max-width: 600px) {
+  .slide-content {
+    padding: 8% 5%;
+  }
+
+  .text-zone {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .mascot {
+    width: 50%;
+    bottom: 5%;
+    opacity: 0.5;
+  }
+}
